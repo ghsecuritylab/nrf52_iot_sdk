@@ -298,9 +298,7 @@ void nrf_message(const char * m)
 /**@breif Interface implementation expected by the LwIP stack to get system ticks. */
 u32_t sys_now(void)
 {
-    u32_t sys_tick;
-
-    UNUSED_VARIABLE(app_timer_cnt_get(&sys_tick));
+    u32_t sys_tick = app_timer_cnt_get();
 
     //Note: In case prescaler value is changed, this calculation to get sys tick applies.
     //Currently, this is not used for saving in code execution as sys_now is called

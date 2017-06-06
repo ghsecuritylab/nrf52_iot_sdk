@@ -27,7 +27,9 @@
 #include "nrf.h"
 #ifdef SOFTDEVICE_PRESENT
 #include "nrf_soc.h"
-#include "nrf_nvic.h"
+ #ifndef SD_s1xx_iot
+  #include "nrf_nvic.h"
+ #endif
 #endif
 #include "nrf_assert.h"
 #include "app_error.h"

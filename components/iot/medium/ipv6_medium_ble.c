@@ -394,7 +394,13 @@ uint32_t ipv6_medium_eui48_get(ipv6_medium_instance_id_t   ipv6_medium_instance_
         return NRF_ERROR_INVALID_PARAM;
     }
     ble_gap_addr_t local_ble_addr;
-    uint32_t err_code = sd_ble_gap_address_get(&local_ble_addr);
+    uint32_t err_code;
+    // Get BLE address.
+	#if (NRF_SD_BLE_API_VERSION == 3)
+		err_code = sd_ble_gap_addr_get(&local_ble_addr);
+	#else
+		err_code = sd_ble_gap_address_get(&local_ble_addr);
+	#endif
     
     memcpy(p_ipv6_medium_eui48->identifier, local_ble_addr.addr, EUI_48_SIZE);
 
@@ -417,7 +423,11 @@ uint32_t ipv6_medium_eui48_set(ipv6_medium_instance_id_t   ipv6_medium_instance_
     m_local_ble_addr.addr_type = BLE_GAP_ADDR_TYPE_PUBLIC;
     memcpy(m_local_ble_addr.addr, p_ipv6_medium_eui48->identifier, EUI_48_SIZE);
 
+#if (NRF_SD_BLE_API_VERSION == 3)
+    return sd_ble_gap_addr_set(&m_local_ble_addr);
+#else
     return sd_ble_gap_address_set(BLE_GAP_ADDR_CYCLE_MODE_NONE, &m_local_ble_addr);
+#endif
 }
 
 
@@ -430,7 +440,12 @@ uint32_t ipv6_medium_eui64_get(ipv6_medium_instance_id_t   ipv6_medium_instance_
     }
     ble_gap_addr_t local_ble_addr;
 
-    uint32_t err_code = sd_ble_gap_address_get(&local_ble_addr);
+    uint32_t err_code;
+	#if (NRF_SD_BLE_API_VERSION == 3)
+		err_code = sd_ble_gap_addr_get(&local_ble_addr);
+	#else
+		err_code = sd_ble_gap_address_get(&local_ble_addr);
+	#endif
     APP_ERROR_CHECK(err_code);
 
     IPV6_EUI64_CREATE_FROM_EUI48(p_ipv6_medium_eui64->identifier,
@@ -460,7 +475,11 @@ uint32_t ipv6_medium_eui64_set(ipv6_medium_instance_id_t   ipv6_medium_instance_
                                           p_ipv6_medium_eui64->identifier, \
                                           local_ble_addr.addr_type);
 
-    return sd_ble_gap_address_set(BLE_GAP_ADDR_CYCLE_MODE_NONE, &local_ble_addr);
+#if (NRF_SD_BLE_API_VERSION == 3)
+    return sd_ble_gap_addr_set(&m_local_ble_addr);
+#else
+    return sd_ble_gap_address_set(BLE_GAP_ADDR_CYCLE_MODE_NONE, &m_local_ble_addr);
+#endif
 }
 
 

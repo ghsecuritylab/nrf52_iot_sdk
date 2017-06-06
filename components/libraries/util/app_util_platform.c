@@ -13,8 +13,10 @@
 #include "app_util_platform.h"
 
 #ifdef SOFTDEVICE_PRESENT
-/* Global nvic state instance, required by nrf_nvic.h */
-nrf_nvic_state_t nrf_nvic_state;
+ #ifndef SD_s1xx_iot
+  /* Global nvic state instance, required by nrf_nvic.h */
+  nrf_nvic_state_t nrf_nvic_state;
+ #endif
 #endif
 
 static uint32_t m_in_critical_region = 0;
