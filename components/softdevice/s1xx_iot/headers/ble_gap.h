@@ -54,12 +54,8 @@
  */
 enum BLE_GAP_SVCS
 {
-  SD_BLE_GAP_ADDR_SET  = BLE_GAP_SVC_BASE,  /**< Set own Bluetooth Address. */
-  SD_BLE_GAP_ADDR_GET,                      /**< Get own Bluetooth Address. */
-  SD_BLE_GAP_WHITELIST_SET,                     /**< Set active whitelist. */
-  SD_BLE_GAP_DEVICE_IDENTITIES_SET,             /**< Set device identity list. */
-  SD_BLE_GAP_PRIVACY_SET,                       /**< Set Privacy settings*/
-  SD_BLE_GAP_PRIVACY_GET,                       /**< Get Privacy settings*/
+  SD_BLE_GAP_ADDRESS_SET  = BLE_GAP_SVC_BASE,  /**< Set own Bluetooth Address. */
+  SD_BLE_GAP_ADDRESS_GET,                      /**< Get own Bluetooth Address. */
   SD_BLE_GAP_ADV_DATA_SET,                     /**< Set Advertising Data. */
   SD_BLE_GAP_ADV_START,                        /**< Start Advertising. */
   SD_BLE_GAP_ADV_STOP,                         /**< Stop Advertising. */
@@ -75,10 +71,6 @@ enum BLE_GAP_SVCS
   SD_BLE_GAP_AUTHENTICATE,                     /**< Initiate Pairing/Bonding. */
   SD_BLE_GAP_SEC_PARAMS_REPLY,                 /**< Reply with Security Parameters. */
   SD_BLE_GAP_AUTH_KEY_REPLY,                   /**< Reply with an authentication key. */
-  SD_BLE_GAP_LESC_DHKEY_REPLY,                  /**< Reply with an LE Secure Connections DHKey. */
-  SD_BLE_GAP_KEYPRESS_NOTIFY,                   /**< Notify of a keypress during an authentication procedure. */
-  SD_BLE_GAP_LESC_OOB_DATA_GET,                 /**< Get the local LE Secure Connections OOB data. */
-  SD_BLE_GAP_LESC_OOB_DATA_SET,                 /**< Set the remote LE Secure Connections OOB data. */
   SD_BLE_GAP_ENCRYPT,                          /**< Initiate encryption procedure. */
   SD_BLE_GAP_SEC_INFO_REPLY,                   /**< Reply with Security Information. */
   SD_BLE_GAP_CONN_SEC_GET,                     /**< Obtain connection security level. */
@@ -96,23 +88,21 @@ enum BLE_GAP_SVCS
  */
 enum BLE_GAP_EVTS
 {
-  BLE_GAP_EVT_CONNECTED  = BLE_GAP_EVT_BASE,    /**< Connection established.                         \n See @ref ble_gap_evt_connected_t.            */
-  BLE_GAP_EVT_DISCONNECTED,                     /**< Disconnected from peer.                         \n See @ref ble_gap_evt_disconnected_t.         */
-  BLE_GAP_EVT_CONN_PARAM_UPDATE,                /**< Connection Parameters updated.                  \n See @ref ble_gap_evt_conn_param_update_t.    */
-  BLE_GAP_EVT_SEC_PARAMS_REQUEST,               /**< Request to provide security parameters.         \n Reply with @ref sd_ble_gap_sec_params_reply.  \n See @ref ble_gap_evt_sec_params_request_t. */
-  BLE_GAP_EVT_SEC_INFO_REQUEST,                 /**< Request to provide security information.        \n Reply with @ref sd_ble_gap_sec_info_reply.    \n See @ref ble_gap_evt_sec_info_request_t.   */
-  BLE_GAP_EVT_PASSKEY_DISPLAY,                  /**< Request to display a passkey to the user.       \n In LESC Numeric Comparison, reply with @ref sd_ble_gap_auth_key_reply. \n See @ref ble_gap_evt_passkey_display_t. */
-  BLE_GAP_EVT_KEY_PRESSED,                      /**< Notification of a keypress on the remote device.\n See @ref ble_gap_evt_key_pressed_t           */
-  BLE_GAP_EVT_AUTH_KEY_REQUEST,                 /**< Request to provide an authentication key.       \n Reply with @ref sd_ble_gap_auth_key_reply.    \n See @ref ble_gap_evt_auth_key_request_t.   */
-  BLE_GAP_EVT_LESC_DHKEY_REQUEST,               /**< Request to calculate an LE Secure Connections DHKey. \n Reply with @ref sd_ble_gap_lesc_dhkey_reply.  \n See @ref ble_gap_evt_lesc_dhkey_request_t */
-  BLE_GAP_EVT_AUTH_STATUS,                      /**< Authentication procedure completed with status. \n See @ref ble_gap_evt_auth_status_t.          */
-  BLE_GAP_EVT_CONN_SEC_UPDATE,                  /**< Connection security updated.                    \n See @ref ble_gap_evt_conn_sec_update_t.      */
-  BLE_GAP_EVT_TIMEOUT,                          /**< Timeout expired.                                \n See @ref ble_gap_evt_timeout_t.              */
-  BLE_GAP_EVT_RSSI_CHANGED,                     /**< RSSI report.                                    \n See @ref ble_gap_evt_rssi_changed_t.         */
-  BLE_GAP_EVT_ADV_REPORT,                       /**< Advertising report.                             \n See @ref ble_gap_evt_adv_report_t.           */
-  BLE_GAP_EVT_SEC_REQUEST,                      /**< Security Request.                               \n See @ref ble_gap_evt_sec_request_t.          */
-  BLE_GAP_EVT_CONN_PARAM_UPDATE_REQUEST,        /**< Connection Parameter Update Request.            \n Reply with @ref sd_ble_gap_conn_param_update. \n See @ref ble_gap_evt_conn_param_update_request_t. */
-  BLE_GAP_EVT_SCAN_REQ_REPORT,                  /**< Scan request report.                            \n See @ref ble_gap_evt_scan_req_report_t.      */
+  BLE_GAP_EVT_CONNECTED  = BLE_GAP_EVT_BASE,    /**< Connection established. @ref ble_gap_evt_connected_t */
+  BLE_GAP_EVT_DISCONNECTED,                     /**< Disconnected from peer. @ref ble_gap_evt_disconnected_t */
+  BLE_GAP_EVT_CONN_PARAM_UPDATE,                /**< Connection Parameters updated. ble_gap_evt_conn_param_update_t */
+  BLE_GAP_EVT_SEC_PARAMS_REQUEST,               /**< Request to provide security parameters. @ref ble_gap_evt_sec_params_request_t */
+  BLE_GAP_EVT_SEC_INFO_REQUEST,                 /**< Request to provide security information. @ref ble_gap_evt_sec_info_request_t */
+  BLE_GAP_EVT_PASSKEY_DISPLAY,                  /**< Request to display a passkey to the user. @ref ble_gap_evt_passkey_display_t */
+  BLE_GAP_EVT_AUTH_KEY_REQUEST,                 /**< Request to provide an authentication key. @ref ble_gap_evt_auth_key_request_t */
+  BLE_GAP_EVT_AUTH_STATUS,                      /**< Authentication procedure completed with status. @ref ble_gap_evt_auth_status_t */
+  BLE_GAP_EVT_CONN_SEC_UPDATE,                  /**< Connection security updated. @ref ble_gap_evt_conn_sec_update_t */
+  BLE_GAP_EVT_TIMEOUT,                          /**< Timeout expired. @ref ble_gap_evt_timeout_t */
+  BLE_GAP_EVT_RSSI_CHANGED,                     /**< RSSI report. @ref ble_gap_evt_rssi_changed_t */
+  BLE_GAP_EVT_ADV_REPORT,                       /**< Advertising report. @ref ble_gap_evt_adv_report_t */
+  BLE_GAP_EVT_SEC_REQUEST,                      /**< Security Request. @ref ble_gap_evt_sec_request_t */
+  BLE_GAP_EVT_CONN_PARAM_UPDATE_REQUEST,        /**< Connection Parameter Update Request. @ref ble_gap_evt_conn_param_update_request_t */
+  BLE_GAP_EVT_SCAN_REQ_REPORT,                  /**< Scan request report. @ref ble_gap_evt_scan_req_report_t */
 };
 
 /**@brief GAP Option IDs.
@@ -384,15 +374,6 @@ enum BLE_GAP_OPTS
 /**@brief GAP Security Key Length. */
 #define BLE_GAP_SEC_KEY_LEN 16
 
-
-/**@brief GAP LE Secure Connections Elliptic Curve Diffie-Hellman P-256 Public Key Length. */
-#define BLE_GAP_LESC_P256_PK_LEN 64
-
-
-/**@brief GAP LE Secure Connections Elliptic Curve Diffie-Hellman DHKey Length. */
-#define BLE_GAP_LESC_DHKEY_LEN   32
-
-
 /**@brief GAP Passkey Length. */
 #define BLE_GAP_PASSKEY_LEN 6
 
@@ -404,14 +385,13 @@ enum BLE_GAP_OPTS
  */
 #define BLE_GAP_WHITELIST_IRK_MAX_COUNT (8)
 
-
-/**@brief Maximum amount of identities in the device identities list. */
-#define BLE_GAP_DEVICE_IDENTITIES_MAX_COUNT (8)
-
 /**@defgroup GAP_SEC_MODES GAP Security Modes
  * @{ */
 #define BLE_GAP_SEC_MODE 0x00 /**< No key (may be used to reject). */
 /**@} */
+
+/**@brief GAP LE Secure Connections Elliptic Curve Diffie-Hellman P-256 Public Key Length. */
+#define BLE_GAP_LESC_P256_PK_LEN 64
 
 /**@} */
 
@@ -522,50 +502,22 @@ typedef struct
 } ble_gap_scan_params_t;
 
 
-/**@brief Device Privacy.
- *
- *        The privacy feature provides a way for the device to avoid being tracked over a period of time.
- *        The privacy feature, when enabled, hides the local device identity and replaces it with a private address
- *        that is automatically refreshed at a specified interval.
- *
- *        If a device still wants to be recognized by other peers, it needs to share it's Identity Resolving Key (IRK).
- *        With this key, a device can generate a random private address that can only be recognized by peers in possession of that key,
- *        and devices can establish connections without revealing their real identities.
- *
- * @note  If the device IRK is updated, the new IRK becomes the one to be distributed in all
- *        bonding procedures performed after @ref sd_ble_gap_privacy_set returns.
- *        The IRK distributed during bonding procedure is the device IRK that is active when @ref sd_ble_gap_sec_params_reply is called.
- */
-typedef struct
-{
-  uint8_t        privacy_mode;         /**< Privacy mode, see @ref BLE_GAP_PRIVACY_MODES. Default is @ref BLE_GAP_PRIVACY_MODE_OFF. */
-  uint8_t        private_addr_type;    /**< The private address type must be either @ref BLE_GAP_ADDR_TYPE_RANDOM_PRIVATE_RESOLVABLE or @ref BLE_GAP_ADDR_TYPE_RANDOM_PRIVATE_NON_RESOLVABLE. */
-  uint16_t       private_addr_cycle_s; /**< Private address cycle interval in seconds. Providing an address cycle value of 0 will use the default value defined by @ref BLE_GAP_DEFAULT_PRIVATE_ADDR_CYCLE_INTERVAL_S. */
-  ble_gap_irk_t *p_device_irk;         /**< When used as input, pointer to IRK structure that will be used as the default IRK. If NULL, the device default IRK will be used.
-                                            When used as output, pointer to IRK structure where the current default IRK will be written to. If NULL, this argument is ignored.
-                                            By default, the default IRK is used to generate random private resolvable addresses for the local device unless instructed otherwise. */
-} ble_gap_privacy_params_t;
-
-
 /** @brief Keys that can be exchanged during a bonding procedure. */
 typedef struct
 {
   uint8_t enc     : 1;                        /**< Long Term Key and Master Identification. */
   uint8_t id      : 1;                        /**< Identity Resolving Key and Identity Address Information. */
   uint8_t sign    : 1;                        /**< Connection Signature Resolving Key. */
-  uint8_t link    : 1;                        /**< Derive the Link Key from the LTK. */
 } ble_gap_sec_kdist_t;
 
 
 /**@brief GAP security parameters. */
 typedef struct
 {
-  uint8_t               bond      : 1;             /**< Perform bonding. */
-  uint8_t               mitm      : 1;             /**< Enable Man In The Middle protection. */
-  uint8_t               lesc      : 1;             /**< Enable LE Secure Connection pairing. */
-  uint8_t               keypress  : 1;             /**< Enable generation of keypress notifications. */
-  uint8_t               io_caps   : 3;             /**< IO capabilities, see @ref BLE_GAP_IO_CAPS. */
-  uint8_t               oob       : 1;             /**< Out Of Band data available. */
+  uint8_t               bond    : 1;               /**< Perform bonding. */
+  uint8_t               mitm    : 1;               /**< Man In The Middle protection required. */
+  uint8_t               io_caps : 3;               /**< IO capabilities, see @ref BLE_GAP_IO_CAPS. */
+  uint8_t               oob     : 1;               /**< Out Of Band data available. */
   uint8_t               min_key_size;              /**< Minimum encryption key size in octets between 7 and 16. If 0 then not applicable in this instance. */
   uint8_t               max_key_size;              /**< Maximum encryption key size in octets between min_key_size and 16. */
   ble_gap_sec_kdist_t   kdist_own;                 /**< Key distribution bitmap: keys that the local device will distribute. */
@@ -603,23 +555,6 @@ typedef struct
 {
   uint8_t   pk[BLE_GAP_LESC_P256_PK_LEN];        /**< LE Secure Connections Elliptic Curve Diffie-Hellman P-256 Public Key. Stored in the standard SMP protocol format: {X,Y} both in little-endian. */
 } ble_gap_lesc_p256_pk_t;
-
-
-/**@brief GAP LE Secure Connections DHKey. */
-typedef struct
-{
-  uint8_t   key[BLE_GAP_LESC_DHKEY_LEN];        /**< LE Secure Connections Elliptic Curve Diffie-Hellman Key. Stored in little-endian. */
-} ble_gap_lesc_dhkey_t;
-
-
-/**@brief GAP LE Secure Connections OOB data. */
-typedef struct
-{
-  ble_gap_addr_t  addr;                          /**< Bluetooth address of the device. */
-  uint8_t         r[BLE_GAP_SEC_KEY_LEN];        /**< Random Number. */
-  uint8_t         c[BLE_GAP_SEC_KEY_LEN];        /**< Confirm Value. */
-} ble_gap_lesc_oob_data_t;
-
 
 /**@brief Event structure for @ref BLE_GAP_EVT_CONNECTED. */
 typedef struct
@@ -669,16 +604,8 @@ typedef struct
 typedef struct
 {
   uint8_t passkey[BLE_GAP_PASSKEY_LEN];         /**< 6-digit passkey in ASCII ('0'-'9' digits only). */
-  uint8_t match_request : 1;                    /**< If 1 requires the application to report the match using @ref sd_ble_gap_auth_key_reply
-                                                     with either @ref BLE_GAP_AUTH_KEY_TYPE_NONE if there is no match or
-                                                     @ref BLE_GAP_AUTH_KEY_TYPE_PASSKEY if there is a match. */
 } ble_gap_evt_passkey_display_t;
 
-/**@brief Event structure for @ref BLE_GAP_EVT_KEY_PRESSED. */
-typedef struct
-{
-  uint8_t kp_not;         /**< Keypress notification type, see @ref BLE_GAP_KP_NOT_TYPES. */
-} ble_gap_evt_key_pressed_t;
 
 /**@brief Event structure for @ref BLE_GAP_EVT_AUTH_KEY_REQUEST. */
 typedef struct
@@ -686,13 +613,6 @@ typedef struct
   uint8_t key_type;                             /**< See @ref BLE_GAP_AUTH_KEY_TYPES. */
 } ble_gap_evt_auth_key_request_t;
 
-/**@brief Event structure for @ref BLE_GAP_EVT_LESC_DHKEY_REQUEST. */
-typedef struct
-{
-  ble_gap_lesc_p256_pk_t *p_pk_peer;  /**< LE Secure Connections remote P-256 Public Key. This will point to the application-supplied memory
-                                           inside the keyset during the call to @ref sd_ble_gap_sec_params_reply. */
-  uint8_t oobd_req       :1;          /**< LESC OOB data required. A call to @ref sd_ble_gap_lesc_oob_data_set is required to complete the procedure. */
-} ble_gap_evt_lesc_dhkey_request_t;
 
 /**@brief Security levels supported.
  * @note See Bluetooth Specification Version 4.1 Volume 3, Part C, Chapter 10.
@@ -702,7 +622,6 @@ typedef struct
   uint8_t lv1 : 1;                              /**< If 1: Level 1 is supported. */
   uint8_t lv2 : 1;                              /**< If 1: Level 2 is supported. */
   uint8_t lv3 : 1;                              /**< If 1: Level 3 is supported. */
-  uint8_t lv4 : 1;                              /**< If 1: Level 4 is supported. */
 } ble_gap_sec_levels_t;
 
 
@@ -717,8 +636,8 @@ typedef struct
 /**@brief Identity Key. */
 typedef struct
 {
-  ble_gap_irk_t         id_info;              /**< Identity Resolving Key. */
-  ble_gap_addr_t        id_addr_info;         /**< Identity Address. */
+  ble_gap_irk_t         id_info;              /**< Identity Information. */
+  ble_gap_addr_t        id_addr_info;         /**< Identity Address Information. */
 } ble_gap_id_key_t;
 
 
@@ -780,10 +699,7 @@ typedef struct
 /**@brief Event structure for @ref BLE_GAP_EVT_ADV_REPORT. */
 typedef struct
 {
-  ble_gap_addr_t peer_addr;                     /**< Bluetooth address of the peer device. If the peer_addr resolved: @ref ble_gap_addr_t::addr_id_peer is set to 1
-                                                     and the address is the device's identity address. */
-  ble_gap_addr_t direct_addr;                   /**< Set when the scanner is unable to resolve the private resolvable address of the initiator
-                                                     field of a directed advertisement packet and the scanner has been enabled to report this in @ref ble_gap_scan_params_t::adv_dir_report. */
+  ble_gap_addr_t peer_addr;                     /**< Bluetooth address of the peer device. */
   int8_t         rssi;                          /**< Received Signal Strength Indication in dBm. */
   uint8_t        scan_rsp : 1;                  /**< If 1, the report corresponds to a scan response and the type field may be ignored. */
   uint8_t        type     : 2;                  /**< See @ref BLE_GAP_ADV_TYPES. Only valid if the scan_rsp field is 0. */
@@ -795,10 +711,8 @@ typedef struct
 /**@brief Event structure for @ref BLE_GAP_EVT_SEC_REQUEST. */
 typedef struct
 {
-  uint8_t    bond       : 1;                       /**< Perform bonding. */
+  uint8_t    bond    : 1;                       /**< Perform bonding. */
   uint8_t    mitm    : 1;                       /**< Man In The Middle protection required. */
-  uint8_t    lesc       : 1;                       /**< LE Secure Connections requested. */
-  uint8_t    keypress   : 1;                       /**< Generation of keypress notifications requested. */
 } ble_gap_evt_sec_request_t;
 
 
@@ -830,9 +744,7 @@ typedef struct
     ble_gap_evt_sec_params_request_t          sec_params_request;           /**< Security Parameters Request Event Parameters. */
     ble_gap_evt_sec_info_request_t            sec_info_request;             /**< Security Information Request Event Parameters. */
     ble_gap_evt_passkey_display_t             passkey_display;              /**< Passkey Display Event Parameters. */
-    ble_gap_evt_key_pressed_t                 key_pressed;                  /**< Key Pressed Event Parameters. */
     ble_gap_evt_auth_key_request_t            auth_key_request;             /**< Authentication Key Request Event Parameters. */
-    ble_gap_evt_lesc_dhkey_request_t          lesc_dhkey_request;           /**< LE Secure Connections DHKey calculation request. */
     ble_gap_evt_auth_status_t                 auth_status;                  /**< Authentication Status Event Parameters. */
     ble_gap_evt_conn_sec_update_t             conn_sec_update;              /**< Connection Security Update Event Parameters. */
     ble_gap_evt_timeout_t                     timeout;                      /**< Timeout Event Parameters. */
@@ -996,7 +908,6 @@ typedef union
 } ble_gap_opt_t;
 /**@} */
 
-
 /**@addtogroup BLE_GAP_FUNCTIONS Functions
  * @{ */
 
@@ -1038,7 +949,7 @@ typedef union
  * @retval ::NRF_ERROR_BUSY The stack is busy, process pending events and retry.
  * @retval ::NRF_ERROR_INVALID_STATE Invalid state to perform operation.
  */
-SVCALL(SD_BLE_GAP_ADDR_SET, uint32_t, sd_ble_gap_addr_set(ble_gap_addr_t const *p_addr));
+SVCALL(SD_BLE_GAP_ADDRESS_SET, uint32_t, sd_ble_gap_address_set(uint8_t addr_cycle_mode, const ble_gap_addr_t *p_addr));
 
 
 /**@brief Get local Bluetooth address.
@@ -1048,7 +959,7 @@ SVCALL(SD_BLE_GAP_ADDR_SET, uint32_t, sd_ble_gap_addr_set(ble_gap_addr_t const *
  * @retval ::NRF_SUCCESS Address successfully retrieved.
  * @retval ::NRF_ERROR_INVALID_ADDR Invalid pointer supplied.
  */
-SVCALL(SD_BLE_GAP_ADDR_GET, uint32_t, sd_ble_gap_addr_get(ble_gap_addr_t *p_addr));
+SVCALL(SD_BLE_GAP_ADDRESS_GET, uint32_t, sd_ble_gap_address_get(ble_gap_addr_t *p_addr));
 
 
 /**@brief Set, clear or update advertising and scan response data.

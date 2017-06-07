@@ -198,7 +198,7 @@ bool softdevice_handler_is_enabled(void)
     return m_softdevice_enabled;
 }
 
-uint32_t softdevice_handler_init(nrf_clock_lf_cfg_t *           p_clock_lf_cfg,
+uint32_t softdevice_handler_init(nrf_clock_lfclksrc_t           clock_source,
                                  void *                         p_ble_evt_buffer,
                                  uint16_t                       ble_evt_buffer_size,
                                  softdevice_evt_schedule_func_t evt_schedule_func)
@@ -237,7 +237,7 @@ uint32_t softdevice_handler_init(nrf_clock_lf_cfg_t *           p_clock_lf_cfg,
     __ISB();
 #endif
     // Initialize SoftDevice.
-    err_code = sd_softdevice_enable(p_clock_lf_cfg, softdevice_assertion_handler);
+    err_code = sd_softdevice_enable(clock_source, softdevice_assertion_handler);
     if (err_code != NRF_SUCCESS)
     {
         return err_code;

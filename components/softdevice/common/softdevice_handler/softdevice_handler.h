@@ -114,7 +114,7 @@ bool softdevice_handler_is_enabled(void);
  * @retval     NRF_ERROR_INVALID_PARAM   Invalid parameter (buffer not aligned to a 4 byte
  *                                       boundary) or NULL.
  */
-uint32_t softdevice_handler_init(nrf_clock_lf_cfg_t *              p_clock_lf_cfg,
+uint32_t softdevice_handler_init(nrf_clock_lfclksrc_t              clock_source,
                                  void *                            p_ble_evt_buffer,
                                  uint16_t                          ble_evt_buffer_size,
                                  softdevice_evt_schedule_func_t    evt_schedule_func);

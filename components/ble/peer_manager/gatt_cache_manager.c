@@ -75,8 +75,10 @@ static void evt_send(gcm_evt_t const * p_gcm_evt)
 static bool cccd_written(ble_gatts_evt_write_t * p_write_evt)
 {
     return (    (p_write_evt->op        == BLE_GATTS_OP_WRITE_REQ)
+#ifndef SD_s1xx_iot
              && (p_write_evt->uuid.type == BLE_UUID_TYPE_BLE)
              && (p_write_evt->uuid.uuid == BLE_UUID_DESCRIPTOR_CLIENT_CHAR_CONFIG)
+#endif
            );
 }
 

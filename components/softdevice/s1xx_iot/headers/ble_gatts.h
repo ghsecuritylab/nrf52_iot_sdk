@@ -300,9 +300,7 @@ typedef struct
 typedef struct
 {
   uint16_t                    handle;             /**< Attribute Handle. */
-  ble_uuid_t                  uuid;               /**< Attribute UUID. */
   uint8_t                     op;                 /**< Type of write operation, see @ref BLE_GATTS_OPS. */
-  uint8_t                     auth_required;      /**< Writing operation deferred due to authorization requirement. Application may use @ref sd_ble_gatts_value_set to finalise the writing operation. */
   ble_gatts_attr_context_t    context;            /**< Attribute Context. */
   uint16_t                    offset;             /**< Offset for the write operation. */
   uint16_t                    len;                /**< Length of the received data. */
@@ -313,7 +311,6 @@ typedef struct
 typedef struct
 {
   uint16_t                    handle;             /**< Attribute Handle. */
-  ble_uuid_t                  uuid;               /**< Attribute UUID. */
   ble_gatts_attr_context_t    context;            /**< Attribute Context. */
   uint16_t                    offset;             /**< Offset for the read operation. */
 } ble_gatts_evt_read_t;

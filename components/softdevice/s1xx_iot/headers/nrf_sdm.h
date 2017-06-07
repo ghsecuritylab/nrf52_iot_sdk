@@ -128,40 +128,6 @@ enum NRF_CLOCK_LFCLKSRCS
 typedef uint32_t nrf_clock_lfclksrc_t;
 
 
-/**@brief Type representing lfclk oscillator source. */
-typedef struct
-{
-  uint8_t source;        /**< LF oscillator clock source, see @ref NRF_CLOCK_LF_SRC. */
-  uint8_t rc_ctiv;      /**< Only for NRF_CLOCK_LF_SRC_RC: Calibration timer interval in 1/4 second
-                              units (nRF51: 1-64, nRF52: 1-32).
-                              @note To avoid excessive clock drift, 0.5 degrees Celsius is the
-                                    maximum temperature change allowed in one calibration timer
-                                    interval. The interval should be selected to ensure this.
-
-                              @note Must be 0 if source is not NRF_CLOCK_LF_SRC_RC.  */
-  uint8_t rc_temp_ctiv; /**<  Only for NRF_CLOCK_LF_SRC_RC: How often (in number of calibration
-                              intervals) the RC oscillator shall be calibrated if the temperature
-                              hasn't changed.
-                                  0: Always calibrate even if the temperature hasn't changed.
-                                  1: Only calibrate if the temperature has changed (nRF51 only).
-                                  2-33: Check the temperature and only calibrate if it has changed,
-                                        however calibration will take place every rc_temp_ctiv
-                                        intervals in any case.
-
-                              @note Must be 0 if source is not NRF_CLOCK_LF_SRC_RC.
-
-                              @note For nRF52, the application must ensure calibration at least once
-                                    every 8 seconds to ensure +/-250ppm clock stability. The
-                                    recommended configuration for NRF_CLOCK_LF_SRC_RC on nRF52 is
-                                    rc_ctiv=16 and rc_temp_ctiv=2. This will ensure calibration at
-                                    least once every 8 seconds and for temperature changes of 0.5
-                                    degrees Celsius every 4 seconds. See the Product Specification
-                                    for the nRF52 device being used for more information.*/
-  uint8_t xtal_accuracy; /**< External crystal clock accuracy used in the LL to compute timing windows.
-
-                              @note For the NRF_CLOCK_LF_SRC_RC clock source this parameter is ignored. */
-} nrf_clock_lf_cfg_t;
-
 /**@brief SoftDevice Assertion Handler type.
  *
  * When an unexpected error occurs within the SoftDevice it will call the SoftDevice assertion handler callback.
